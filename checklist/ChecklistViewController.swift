@@ -34,6 +34,8 @@ class ChecklistViewController: UITableViewController {
         let row4item = ChecklistItem()
         row4item.text = "Learn iOS coding"
         items.append(row4item)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     // MARK: - Table View Data Source
@@ -53,6 +55,19 @@ class ChecklistViewController: UITableViewController {
         configureText(for: cell, with: item)
         configureCheckmark(for: cell, with: item)
         return cell
+    }
+    
+    override func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath
+    ) {
+        // 1
+        items.remove(at: indexPath.row)
+        
+        // 2
+        let indexPaths = [indexPath]
+        tableView.deleteRows(at: indexPaths, with: .automatic)
     }
     
     // MARK: - Table View Delegate
@@ -82,6 +97,20 @@ class ChecklistViewController: UITableViewController {
     func configureText(for cell: UITableViewCell, with item: ChecklistItem){
         let label = cell.viewWithTag(1000) as! UILabel
         label.text = item.text
+    }
+    
+    // MARK: - Actions
+    @IBAction func addItem (){
+        let newRowIndex = items.count
+        
+        let newItem = ChecklistItem()
+        newItem.text = "I am a new row"
+        items.append(newItem)
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexPaths = [indexPath]
+        
+        tableView.insertRows(at: indexPaths, with: .automatic)
     }
     
 }
