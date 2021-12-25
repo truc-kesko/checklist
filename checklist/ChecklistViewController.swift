@@ -36,9 +36,6 @@ class ChecklistViewController: UITableViewController, ItemViewControllerDelegate
         items.append(row4item)
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        print("Documents folder is \(documentsDirectory())")
-        print("Data file path is \(dataFilePath())")
         loadChecklistItems()
     }
     
