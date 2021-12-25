@@ -27,6 +27,8 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
+        
+        self.tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +77,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        doneBarBtn.isEnabled = true
+        doneBarBtn.isEnabled = false
         return true
     }
 
