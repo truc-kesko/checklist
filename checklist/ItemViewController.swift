@@ -7,28 +7,39 @@
 
 import UIKit
 
-protocol AddItemViewControllerDelegate: AnyObject {
+protocol ItemViewControllerDelegate: AnyObject {
     func addItemViewControllerDidCancel(
-        _ controller: AddItemViewController
+        _ controller: ItemViewController
     )
     func addItemViewController(
-        _ controller: AddItemViewController,
+        _ controller: ItemViewController,
         didFinnishAdding item: ChecklistItem
+    )
+    func addItemViewController(
+        _ controller: ItemViewController,
+        didFinnishEditing item: ChecklistItem
     )
 }
 
 
-class AddItemViewController: UITableViewController, UITextFieldDelegate {
-    weak var delegate: AddItemViewControllerDelegate?
+class ItemViewController: UITableViewController, UITextFieldDelegate {
+    weak var delegate: ItemViewControllerDelegate?
     
     @IBOutlet weak var doneBarBtn: UIBarButtonItem!
     @IBOutlet weak var textField: UITextField!
+    var itemToEdit: ChecklistItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         
         self.tableView.separatorStyle = .none
+        
+        if let item = itemToEdit {
+            title = "Edit View"
+            textField.text = item.text
+            doneBarBtn.isEnabled = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,10 +54,14 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func add() {
-        let item = ChecklistItem()
-        item.text = textField.text!
-        
-        delegate?.addItemViewController(self, didFinnishAdding: item)
+        if let item = itemToEdit {
+            item.text = textField.text!
+            delegate?.addItemViewController(self, didFinnishEditing: item)
+        } else {
+            let item = ChecklistItem()
+            item.text = textField.text!
+            delegate?.addItemViewController(self, didFinnishAdding: item)
+        }
     }
     
     // MARK: - Table View Delegates
