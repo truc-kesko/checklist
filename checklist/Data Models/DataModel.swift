@@ -77,6 +77,7 @@ class DataModel {
             
             indexOfSelectedChecklist = 0
             userDefaults.set(false, forKey: "FirstTime")
+            saveChecklists()
         }
     }
 }
