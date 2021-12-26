@@ -89,6 +89,7 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
         let indexPaths = [indexPath]
         tableView.insertRows(at: indexPaths, with: .automatic)
         navigationController?.popViewController(animated: true)
+        dataModel.saveChecklists()
     }
     
     func listDetailTableViewController(_ controller: ListDetailTableViewController, didFinnishEditing checklist: Checklist) {
@@ -99,12 +100,14 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
             }
         }
         navigationController?.popViewController(animated: true)
+        dataModel.saveChecklists()
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         dataModel.lists.remove(at: indexPath.row)
         let indexPath = [indexPath]
         tableView.deleteRows(at: indexPath, with: .automatic)
+        dataModel.saveChecklists()
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {

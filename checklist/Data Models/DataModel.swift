@@ -38,11 +38,12 @@ class DataModel {
     
     func dataFilePath() -> URL {
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return documents.appendingPathComponent("Checklists.plist")
+        return documents.appendingPathComponent("Checklists.xml")
     }
     
     func saveChecklists() {
         let encoder = PropertyListEncoder()
+        encoder.outputFormat = .xml
         do {
             let data = try encoder.encode(lists)
             try data.write(
@@ -55,6 +56,7 @@ class DataModel {
     
     func loadChecklists() {
         let path = dataFilePath()
+        
         if let data = try? Data(contentsOf: path) {
             let decoder = PropertyListDecoder()
             do {
@@ -87,9 +89,9 @@ class DataModel {
             checklistItem.text = "Sample list item"
             checklist.items.append(checklistItem)
             lists.append(checklist)
-            
             indexOfSelectedChecklist = 0
             userDefaults.set(false, forKey: "FirstTime")
+            saveChecklists()
         }
     }
 }
