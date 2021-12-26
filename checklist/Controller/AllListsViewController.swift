@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AllListsViewController: UITableViewController, ListDetailTableViewControllerDelegate {
+class AllListsViewController: UITableViewController, ListDetailTableViewControllerDelegate, UINavigationControllerDelegate {
     let cellIdentifier = "ChecklistCell"
     var lists = [Checklist]()
     var dataModel: DataModel!
@@ -16,6 +16,18 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        navigationController?.delegate = self
+        
+        let index = dataModel.indexOfSelectedChecklist
+        if index > 0 && index < dataModel.lists.count {
+            let checklist = dataModel.lists[index]
+            performSegue(withIdentifier: "ShowChecklist", sender: checklist)
+        }
     }
     
     // MARK: - Table view data source
@@ -41,6 +53,7 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
         didSelectRowAt indexPath: IndexPath
     ) {
         let checklist = dataModel.lists[indexPath.row]
+        dataModel.indexOfSelectedChecklist = indexPath.row
         performSegue(withIdentifier: "ShowChecklist", sender: checklist)
     }
     
@@ -94,4 +107,11 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
         }
     }
     
+    // MARK: - Navigation controller delegates
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        // Was back button tapped?
+        if viewController === self {
+            dataModel.indexOfSelectedChecklist = -1
+        }
+    }
 }
