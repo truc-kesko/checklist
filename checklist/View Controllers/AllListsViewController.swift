@@ -14,8 +14,12 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,22 +36,38 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
     
     // MARK: - Table view data source
     override func tableView(
-      _ tableView: UITableView,
-      numberOfRowsInSection section: Int
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
     ) -> Int {
         return dataModel.lists.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        // Get cell
+        let cell: UITableViewCell!
+        if let tmp = tableView.dequeueReusableCell(
+            withIdentifier: cellIdentifier) {
+            cell = tmp
+        } else {
+            cell = UITableViewCell(
+                style: .subtitle,
+                reuseIdentifier: cellIdentifier)
+        }
         
         let checklist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = checklist.name
         cell.accessoryType = .detailDisclosureButton
+        let count = checklist.countUncheckedItems()
+        if checklist.items.count == 0 {
+            cell.detailTextLabel!.text = "No items"
+        } else {
+            cell.detailTextLabel!.text = count == 0 ? "All Done" : "\(checklist.countUncheckedItems()) Remaining"
+        }
+        
         return cell
     }
-
+    
     override func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
