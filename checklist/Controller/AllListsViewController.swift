@@ -15,19 +15,7 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        // Add placeholder data
-          var list = Checklist(name: "Birthdays")
-          lists.append(list)
-
-          list = Checklist(name: "Groceries")
-          lists.append(list)
-
-          list = Checklist(name: "Cool Apps")
-          lists.append(list)
-
-          list = Checklist(name: "To Do")
-          lists.append(list)
+        loadChecklists()
     }
     
     // MARK: - Table view data source
@@ -103,6 +91,41 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
         } else if segue.identifier == "AddChecklist" {
             let controller = segue.destination as! ListDetailTableViewController
             controller.delegate = self
+        }
+    }
+    
+    // MARK: - Data Saving
+    func documentsDirectory () -> URL {
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return path[0]
+    }
+    
+    func dataFilePath () -> URL {
+        return documentsDirectory().appendingPathComponent("Checklists.plist")
+    }
+    
+    func saveChecklists () {
+        let encoder = PropertyListEncoder()
+        
+        do {
+            let data = try encoder.encode(lists)
+            
+            try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
+            
+        } catch {
+            print("Error encoding item array: \(error.localizedDescription)")
+        }
+    }
+    
+    func loadChecklists () {
+        let path = dataFilePath()
+        if let data = try? Data(contentsOf: path) {
+            let decoder = PropertyListDecoder()
+            do {
+                lists = try decoder.decode([Checklist].self, from: data)
+            } catch {
+                print("Error decoding item array: \(error.localizedDescription)")
+            }
         }
     }
     
