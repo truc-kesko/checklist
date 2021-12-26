@@ -10,33 +10,24 @@ import UIKit
 class ChecklistViewController: UITableViewController, ItemViewControllerDelegate {
     
     var items = [ChecklistItem]()
+    var checklist: Checklist!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         let row0item = ChecklistItem()
-        row0item.text = "Clean the table"
+        row0item.text = "Example 1"
         items.append(row0item)
         
         let row1item = ChecklistItem()
-        row1item.text = "Wash dishes"
+        row1item.text = "Example 2"
         items.append(row1item)
         
-        let row2item = ChecklistItem()
-        row2item.text = "Make breakfast"
-        items.append(row2item)
-        
-        let row3item = ChecklistItem()
-        row3item.text = "Walk the dog"
-        items.append(row3item)
-        
-        let row4item = ChecklistItem()
-        row4item.text = "Learn iOS coding"
-        items.append(row4item)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .never
         loadChecklistItems()
+        title = checklist.name
+        
     }
     
     // MARK: - Table View Data Source
