@@ -14,12 +14,12 @@ protocol ListDetailTableViewControllerDelegate: AnyObject {
     
     func listDetailTableViewController(
         _ controller: ListDetailTableViewController,
-        didFinnishAdding checklist: Checklist
+        didFinishAdding checklist: Checklist
     )
     
     func listDetailTableViewController(
         _ controller: ListDetailTableViewController,
-        didFinnishEditing checklist: Checklist
+        didFinishEditing checklist: Checklist
     )
 }
 
@@ -55,10 +55,10 @@ class ListDetailTableViewController: UITableViewController, UITextViewDelegate {
     @IBAction func done(){
         if let checklist = checklistToEdit {
             checklist.name = textField.text!
-            delegate?.listDetailTableViewController(self, didFinnishEditing: checklist)
+            delegate?.listDetailTableViewController(self, didFinishEditing: checklist)
         } else {
             let checklist = Checklist(name: textField.text!)
-            delegate?.listDetailTableViewController(self, didFinnishAdding: checklist)
+            delegate?.listDetailTableViewController(self, didFinishAdding: checklist)
         }
     }
     
