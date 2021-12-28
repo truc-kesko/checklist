@@ -15,11 +15,13 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(named: "Blue")!]
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,6 +66,7 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
         } else {
             cell.detailTextLabel!.text = count == 0 ? "All Done" : "\(checklist.countUncheckedItems()) Remaining"
         }
+        cell.detailTextLabel!.textColor = UIColor.gray
         cell.imageView!.image = UIImage(named: checklist.iconName)
         return cell
     }

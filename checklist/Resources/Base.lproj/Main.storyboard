@@ -20,7 +20,7 @@
                             <outlet property="delegate" destination="Yxe-kY-5b0" id="Z3N-0o-sEe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Checklists" id="5Ss-5O-IMx">
+                    <navigationItem key="navigationItem" title="Lists" id="5Ss-5O-IMx">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="zbv-YR-yMZ">
                             <connections>
                                 <segue destination="A7l-OH-lHR" kind="show" identifier="AddChecklist" id="vXe-mn-xDj"/>
@@ -36,7 +36,7 @@
             </objects>
             <point key="canvasLocation" x="644" y="-828"/>
         </scene>
-        <!--Add Checklist-->
+        <!--Add list-->
         <scene sceneID="ewl-Hg-7Bw">
             <objects>
                 <tableViewController storyboardIdentifier="ListDetailTableViewController" id="A7l-OH-lHR" customClass="ListDetailTableViewController" customModule="checklist" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,9 +84,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcK-Qe-GyY">
-                                                    <rect key="frame" x="16" y="11" width="33" height="21"/>
+                                                    <rect key="frame" x="16" y="11" width="35" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -116,7 +116,7 @@
                             <outlet property="delegate" destination="A7l-OH-lHR" id="zD6-2V-S23"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Checklist" largeTitleDisplayMode="never" id="rR2-hN-OA2">
+                    <navigationItem key="navigationItem" title="Add list" largeTitleDisplayMode="never" id="rR2-hN-OA2">
                         <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="2VA-mR-4Sm">
                             <connections>
                                 <action selector="cancel" destination="A7l-OH-lHR" id="NEQ-pf-3AR"/>
@@ -318,6 +318,7 @@
         <segue reference="Ld5-fP-vQA"/>
         <segue reference="vXe-mn-xDj"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.015686274509803921" green="0.66274509803921566" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
