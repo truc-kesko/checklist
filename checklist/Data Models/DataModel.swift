@@ -42,6 +42,7 @@ class DataModel {
     }
     
     func saveChecklists() {
+        print("Saving check lists...")
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .xml
         do {
@@ -101,4 +102,13 @@ class DataModel {
             return list1.name.localizedStandardCompare(list2.name) == .orderedAscending
         }
     }
+    
+    class func nextChecklistItemId() -> Int {
+        let userDefaults = UserDefaults.standard
+        let itemID = userDefaults.integer(forKey: "ChecklistItemID")
+        userDefaults.set(itemID + 1, forKey: "ChecklistItemID")
+        return itemID
+        
+    }
 }
+

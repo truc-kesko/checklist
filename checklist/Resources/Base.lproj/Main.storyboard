@@ -3,6 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -268,6 +269,51 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="Q9r-4r-52R">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="92" id="UQk-WQ-j8o">
+                                        <rect key="frame" x="0.0" y="76.5" width="375" height="92"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UQk-WQ-j8o" id="8Qq-DV-z8T">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Remind me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvz-gN-pNT">
+                                                    <rect key="frame" x="16" y="11" width="86" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FGS-4g-xmh">
+                                                    <rect key="frame" x="310" y="0.0" width="51" height="92"/>
+                                                    <color key="onTintColor" name="Blue"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Due date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGN-2k-bEt">
+                                                    <rect key="frame" x="16" y="60" width="69" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="KRU-Ch-pYN">
+                                                    <rect key="frame" x="129" y="-128" width="230" height="216"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="230" id="5RJ-mV-8FU"/>
+                                                    </constraints>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="FGS-4g-xmh" secondAttribute="bottom" id="MGk-MC-pP7"/>
+                                                <constraint firstAttribute="bottom" secondItem="KRU-Ch-pYN" secondAttribute="bottom" constant="4" id="MZF-Yw-h7n"/>
+                                                <constraint firstAttribute="trailing" secondItem="FGS-4g-xmh" secondAttribute="trailing" constant="16" id="NTx-SB-we8"/>
+                                                <constraint firstAttribute="trailing" secondItem="KRU-Ch-pYN" secondAttribute="trailing" constant="16" id="NzM-Hf-PFN"/>
+                                                <constraint firstItem="FGS-4g-xmh" firstAttribute="top" secondItem="8Qq-DV-z8T" secondAttribute="top" id="dmM-rH-Bas"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="ZrY-ME-Uf0" id="Rnb-FC-X3f"/>
@@ -287,13 +333,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="datePicker" destination="KRU-Ch-pYN" id="raL-RI-mQe"/>
                         <outlet property="doneBarBtn" destination="Emw-K1-6A9" id="7w4-IO-DTk"/>
+                        <outlet property="shouldRemindSwitch" destination="FGS-4g-xmh" id="C6o-2O-v6a"/>
                         <outlet property="textField" destination="eMf-ER-7lm" id="Kvj-xj-HUy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xnk-IR-d6M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1756" y="-26"/>
+            <point key="canvasLocation" x="1756" y="-26.53673163418291"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DTQ-xO-L4e">
@@ -320,6 +368,9 @@
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.015686274509803921" green="0.66274509803921566" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
+        <namedColor name="Blue">
+            <color red="0.016000000759959221" green="0.66299998760223389" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

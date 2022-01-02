@@ -27,6 +27,8 @@ class ListDetailTableViewController: UITableViewController, UITextViewDelegate, 
     @IBOutlet var textField: UITextField!
     @IBOutlet var doneBarBtn: UIBarButtonItem!
     @IBOutlet weak var iconImage: UIImageView!
+
+    
     var iconName = "Folder"
     
     weak var delegate: ListDetailTableViewControllerDelegate?

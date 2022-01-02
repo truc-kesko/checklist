@@ -24,9 +24,12 @@ protocol ItemViewControllerDelegate: AnyObject {
 
 class ItemViewController: UITableViewController, UITextFieldDelegate {
     weak var delegate: ItemViewControllerDelegate?
-    
+
     @IBOutlet weak var doneBarBtn: UIBarButtonItem!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet var shouldRemindSwitch: UISwitch!
+    @IBOutlet var datePicker: UIDatePicker!
+    
     var itemToEdit: ChecklistItem?
     
     override func viewDidLoad() {
@@ -39,6 +42,8 @@ class ItemViewController: UITableViewController, UITextFieldDelegate {
             title = "Edit View"
             textField.text = item.text
             doneBarBtn.isEnabled = true
+            shouldRemindSwitch.isOn = item.shouldRemind
+            datePicker.date = item.dueDate
         }
     }
     
@@ -56,10 +61,19 @@ class ItemViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func add() {
         if let item = itemToEdit {
             item.text = textField.text!
+            
+            item.shouldRemind = shouldRemindSwitch.isOn
+            item.dueDate = datePicker.date
+            
             delegate?.addItemViewController(self, didFinnishEditing: item)
         } else {
             let item = ChecklistItem()
             item.text = textField.text!
+            item.checked = false
+            
+            item.shouldRemind = shouldRemindSwitch.isOn
+            item.dueDate = datePicker.date
+            
             delegate?.addItemViewController(self, didFinnishAdding: item)
         }
     }
