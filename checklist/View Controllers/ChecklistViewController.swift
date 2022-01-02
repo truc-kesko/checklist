@@ -60,10 +60,16 @@ class ChecklistViewController: UITableViewController, ItemViewControllerDelegate
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
+        let generator = UINotificationFeedbackGenerator()
         if let cell = tableView.cellForRow(at: indexPath){
             let item = checklist.items[indexPath.row]
             item.checked.toggle()
             configureCheckmark(for: cell, with: item)
+            if item.checked {
+                generator.notificationOccurred(.success)
+            } else {
+                generator.notificationOccurred(.warning)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
