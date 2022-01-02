@@ -11,15 +11,14 @@ class ChecklistViewController: UITableViewController, ItemViewControllerDelegate
     
     var items = [ChecklistItem]()
     var checklist: Checklist!
+    var dataModel: DataModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         navigationItem.largeTitleDisplayMode = .never
-        loadChecklistItems()
         title = checklist.name
-        
     }
     
     // MARK: - Table View Data Source
@@ -53,7 +52,6 @@ class ChecklistViewController: UITableViewController, ItemViewControllerDelegate
         // 2
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
-        saveChecklistItems()
     }
     
     // MARK: - Table View Delegate
@@ -68,7 +66,6 @@ class ChecklistViewController: UITableViewController, ItemViewControllerDelegate
             configureCheckmark(for: cell, with: item)
         }
         tableView.deselectRow(at: indexPath, animated: true)
-        saveChecklistItems()
     }
     
     func configureCheckmark(
@@ -99,8 +96,8 @@ class ChecklistViewController: UITableViewController, ItemViewControllerDelegate
         let indexPath = IndexPath(row: newRowIndex, section: 0)
         let indexPaths = [indexPath]
         tableView.insertRows(at: indexPaths, with: .automatic)
+        dataModel.saveChecklists()
         navigationController?.popViewController(animated: true)
-        saveChecklistItems()
     }
     
     func addItemViewController(_ controller: ItemViewController, didFinnishEditing item: ChecklistItem) {
@@ -110,8 +107,8 @@ class ChecklistViewController: UITableViewController, ItemViewControllerDelegate
                 configureText(for: cell, with: item)
             }
         }
+        dataModel.saveChecklists()
         navigationController?.popViewController(animated: true)
-        saveChecklistItems()
     }
     
     
@@ -126,41 +123,6 @@ class ChecklistViewController: UITableViewController, ItemViewControllerDelegate
             
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 controller.itemToEdit = checklist.items[indexPath.row]
-            }
-        }
-    }
-    
-    // MARK: - Data persistent
-    func documentsDirectory () -> URL {
-        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return path[0]
-    }
-    
-    func dataFilePath () -> URL {
-        return documentsDirectory().appendingPathComponent("Checklists.plist")
-    }
-    
-    func saveChecklistItems () {
-        let encoder = PropertyListEncoder()
-        
-        do {
-            let data = try encoder.encode(checklist.items)
-            
-            try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
-            
-        } catch {
-            print("Error encoding item array: \(error.localizedDescription)")
-        }
-    }
-    
-    func loadChecklistItems () {
-        let path = dataFilePath()
-        if let data = try? Data(contentsOf: path) {
-            let decoder = PropertyListDecoder()
-            do {
-                items = try decoder.decode([ChecklistItem].self, from: data)
-            } catch {
-                print("Error decoding item array: \(error.localizedDescription)")
             }
         }
     }

@@ -8,6 +8,7 @@
 import UIKit
 
 class AllListsViewController: UITableViewController, ListDetailTableViewControllerDelegate, UINavigationControllerDelegate {
+    
     let cellIdentifier = "ChecklistCell"
     var lists = [Checklist]()
     var dataModel: DataModel!
@@ -120,6 +121,7 @@ class AllListsViewController: UITableViewController, ListDetailTableViewControll
         if segue.identifier == "ShowChecklist" {
             let controller = segue.destination as! ChecklistViewController
             controller.checklist = sender as? Checklist
+            controller.dataModel = dataModel
         } else if segue.identifier == "AddChecklist" {
             let controller = segue.destination as! ListDetailTableViewController
             controller.delegate = self
