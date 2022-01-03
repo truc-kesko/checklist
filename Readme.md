@@ -8,7 +8,7 @@ You can have checklist folders such as shoppinglist, travel, etc.
 
 You can mark the items in the checklist as done
 
-![Checklistapp](/images/screenshot3.png "Cheklistapp")
+![Checklistapp](/images/screenshot2.png "Cheklistapp")
 
 You can also schedule a notification for your item
 
