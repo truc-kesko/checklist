@@ -42,7 +42,6 @@ class DataModel {
     }
     
     func saveChecklists() {
-        print("Saving check lists...")
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .xml
         do {

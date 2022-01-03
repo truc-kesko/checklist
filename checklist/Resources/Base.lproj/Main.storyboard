@@ -288,6 +288,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FGS-4g-xmh">
                                                     <rect key="frame" x="310" y="0.0" width="51" height="92"/>
                                                     <color key="onTintColor" name="Blue"/>
+                                                    <connections>
+                                                        <action selector="shouldRemindToggled:" destination="ZrY-ME-Uf0" eventType="valueChanged" id="tqR-pA-mex"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Due date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGN-2k-bEt">
                                                     <rect key="frame" x="16" y="60" width="69" height="21"/>
